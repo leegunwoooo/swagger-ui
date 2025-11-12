@@ -1285,10 +1285,14 @@
       },
       "UpdatePasswordRequest": {
         "required": [
+          "email",
           "password"
         ],
         "type": "object",
         "properties": {
+          "email": {
+            "type": "string"
+          },
           "password": {
             "type": "string"
           }
@@ -1457,7 +1461,7 @@
           "childNode": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/NodeResponse"
+              "$ref": "#/components/schemas/SimpleNodeResponse"
             }
           },
           "progress": {
@@ -1468,6 +1472,21 @@
             "type": "boolean"
           },
           "subject": {
+            "type": "string"
+          }
+        }
+      },
+      "SimpleNodeResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
             "type": "string"
           }
         }
