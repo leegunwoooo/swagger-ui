@@ -1270,9 +1270,13 @@
           }
         }
       },
-      "UserResponse": {
+      "UserInfo": {
         "type": "object",
         "properties": {
+          "uuid": {
+            "type": "integer",
+            "format": "int64"
+          },
           "username": {
             "type": "string"
           },
@@ -1281,6 +1285,14 @@
           },
           "role": {
             "type": "string"
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "userInfo": {
+            "$ref": "#/components/schemas/UserInfo"
           },
           "teams": {
             "type": "array",
@@ -1822,22 +1834,8 @@
       "SignUpResponse": {
         "type": "object",
         "properties": {
-          "uuid": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "email": {
-            "type": "string"
-          },
-          "username": {
-            "type": "string"
-          },
-          "role": {
-            "type": "string",
-            "enum": [
-              "ROLE_ADMIN",
-              "ROLE_USER"
-            ]
+          "userInfo": {
+            "$ref": "#/components/schemas/UserInfo"
           }
         }
       },
