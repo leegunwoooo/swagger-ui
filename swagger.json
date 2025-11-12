@@ -597,37 +597,6 @@
         }
       }
     },
-    "/apply/{applyId}/approve": {
-      "put": {
-        "tags": [
-          "team-apply-controller"
-        ],
-        "operationId": "approved",
-        "parameters": [
-          {
-            "name": "applyId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/SingleCommonResponseApplyResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/{nodeId}/problems": {
       "post": {
         "tags": [
@@ -732,6 +701,24 @@
       }
     },
     "/teams": {
+      "get": {
+        "tags": [
+          "team-controller"
+        ],
+        "operationId": "getTeams",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleCommonResponseTeamListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "team-controller"
@@ -754,6 +741,34 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/SingleCommonResponseTeamResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "team-controller"
+        ],
+        "operationId": "inviteTeam",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TeamInviteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleCommonResponseTeamListResponse"
                 }
               }
             }
@@ -1085,68 +1100,6 @@
           "auth-controller"
         ],
         "operationId": "logout",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/SingleCommonResponseString"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/apply/{teamId}": {
-      "post": {
-        "tags": [
-          "team-apply-controller"
-        ],
-        "operationId": "apply",
-        "parameters": [
-          {
-            "name": "teamId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/SingleCommonResponseApplyResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/apply/{applyId}/reject": {
-      "patch": {
-        "tags": [
-          "team-apply-controller"
-        ],
-        "operationId": "reject",
-        "parameters": [
-          {
-            "name": "applyId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1791,39 +1744,6 @@
           }
         }
       },
-      "ApplyResponse": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "teamName": {
-            "type": "string"
-          },
-          "applyStatus": {
-            "type": "string",
-            "enum": [
-              "SUBMITTED",
-              "APPROVED"
-            ]
-          }
-        }
-      },
-      "SingleCommonResponseApplyResponse": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/ApplyResponse"
-          }
-        }
-      },
       "ProblemRequest": {
         "required": [
           "answer",
@@ -1973,6 +1893,9 @@
           "leader": {
             "type": "string"
           },
+          "inviteCode": {
+            "type": "string"
+          },
           "members": {
             "type": "array",
             "items": {
@@ -2089,6 +2012,42 @@
           }
         }
       },
+      "TeamInviteRequest": {
+        "required": [
+          "inviteCode"
+        ],
+        "type": "object",
+        "properties": {
+          "inviteCode": {
+            "type": "string"
+          }
+        }
+      },
+      "SingleCommonResponseTeamListResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/TeamListResponse"
+          }
+        }
+      },
+      "TeamListResponse": {
+        "type": "object",
+        "properties": {
+          "teams": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "SubjectRequest": {
         "required": [
           "subject"
@@ -2143,20 +2102,6 @@
               "ELECTRONIC_CAD",
               "PCB"
             ]
-          }
-        }
-      },
-      "SingleCommonResponseString": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "string"
           }
         }
       },
@@ -2256,6 +2201,20 @@
           },
           "data": {
             "$ref": "#/components/schemas/RoadmapCountResponse"
+          }
+        }
+      },
+      "SingleCommonResponseString": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
           }
         }
       }
