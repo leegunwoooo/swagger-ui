@@ -278,15 +278,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/SingleCommonResponseString"
-                }
-              }
-            }
+          "204": {
+            "description": "No Content"
           }
         }
       },
@@ -396,15 +389,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/SingleCommonResponseString"
-                }
-              }
-            }
+          "204": {
+            "description": "No Content"
           }
         }
       }
@@ -467,14 +453,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/SingleCommonResponseString"
-                }
-              }
-            }
+            "description": "No Content"
           }
         }
       }
@@ -554,15 +533,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/SingleCommonResponseString"
-                }
-              }
-            }
+          "204": {
+            "description": "No Content"
           }
         }
       }
@@ -625,8 +597,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "content": {
               "*/*": {
                 "schema": {
@@ -664,8 +636,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
+          "204": {
+            "description": "No Content",
             "content": {
               "*/*": {
                 "schema": {
@@ -735,8 +707,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "content": {
               "*/*": {
                 "schema": {
@@ -763,8 +735,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
+          "204": {
+            "description": "No Content",
             "content": {
               "*/*": {
                 "schema": {
@@ -833,8 +805,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "content": {
               "*/*": {
                 "schema": {
@@ -1101,15 +1073,8 @@
         ],
         "operationId": "logout",
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/SingleCommonResponseString"
-                }
-              }
-            }
+          "204": {
+            "description": "No Content"
           }
         }
       }
@@ -1119,7 +1084,7 @@
         "tags": [
           "team-controller"
         ],
-        "operationId": "getTeam",
+        "operationId": "getTeamInfo",
         "parameters": [
           {
             "name": "id",
@@ -1161,15 +1126,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/SingleCommonResponseString"
-                }
-              }
-            }
+          "204": {
+            "description": "No Content"
           }
         }
       }
@@ -2216,20 +2174,6 @@
           },
           "data": {
             "$ref": "#/components/schemas/RoadmapCountResponse"
-          }
-        }
-      },
-      "SingleCommonResponseString": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "string"
           }
         }
       }
