@@ -143,6 +143,27 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "deleteUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteUserRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
       }
     },
     "/users/school": {
@@ -1475,6 +1496,14 @@
           }
         }
       },
+      "CategoryRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
       "RoadmapRequest": {
         "required": [
           "categories",
@@ -1499,7 +1528,7 @@
           "categories": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/CategoryRequest"
             }
           },
           "directoryId": {
@@ -2174,6 +2203,9 @@
             "$ref": "#/components/schemas/RoadmapCountResponse"
           }
         }
+      },
+      "DeleteUserRequest": {
+        "type": "object"
       }
     }
   }
